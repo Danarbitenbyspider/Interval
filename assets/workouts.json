@@ -1,0 +1,227 @@
+{
+  "workouts": [
+    {
+      "id": "jp_walk_3x3",
+      "title": "Japanese Walking Interval (3×3)",
+      "description": "Jalan cepat 3 menit + jalan lambat 3 menit, diulang 3 kali.",
+      "mode": "japanese_walking",
+      "segments": [
+        {
+          "type": "warmup",
+          "label": "Pemanasan",
+          "seconds": 60,
+          "cues": {
+            "beep_start": true
+          }
+        },
+        {
+          "type": "work",
+          "label": "Fast Walk",
+          "seconds": 180,
+          "cues": {
+            "bpm": 100,
+            "beep_start": true,
+            "beep_loop": true
+          }
+        },
+        {
+          "type": "recovery",
+          "label": "Recovery Walk",
+          "seconds": 180,
+          "cues": {
+            "bpm": 60,
+            "beep_start": true,
+            "beep_loop": true
+          }
+        }
+      ],
+      "repeat": 3,
+      "options": {
+        "mode": ["Default", "Custom"]
+      },
+      "customizable": {
+        "warmup": true,
+        "work": true,
+        "recovery": true,
+        "repeat": true
+      }
+    },
+    {
+      "id": "tabata_basic_4",
+      "title": "Tabata Basic (4')",
+      "description": "8 putaran 20 detik kerja / 10 detik istirahat.",
+      "mode": "tabata",
+      "segments": [
+        {
+          "type": "warmup",
+          "label": "Pemanasan",
+          "seconds": 60,
+          "cues": {
+            "beep_start": true
+          }
+        },
+        {
+          "type": "work",
+          "label": "Kerja",
+          "seconds": 20,
+          "cues": {
+            "beep_start": true
+          }
+        },
+        {
+          "type": "recovery",
+          "label": "Istirahat",
+          "seconds": 10,
+          "cues": {
+            "beep_start": true
+          }
+        }
+      ],
+      "repeat": 8,
+      "options": {
+        "mode": ["Default", "Custom"]
+      },
+      "customizable": {
+        "warmup": true,
+        "work": true,
+        "recovery": true,
+        "repeat": true
+      }
+    },
+    {
+      "id": "mobility_12",
+      "title": "Mobility Interval (12')",
+      "description": "45 detik gerak / 15 detik transisi, 12 menit total.",
+      "mode": "mobility",
+      "segments": [
+        {
+          "type": "warmup",
+          "label": "Joint Prep",
+          "seconds": 60,
+          "cues": {
+            "beep_start": true
+          }
+        },
+        {
+          "type": "work",
+          "label": "Mobility Flow",
+          "seconds": 45,
+          "cues": {
+            "beep_start": true,
+            "beep_loop": true
+          }
+        },
+        {
+          "type": "recovery",
+          "label": "Transisi",
+          "seconds": 15,
+          "cues": {
+            "beep_start": true
+          }
+        }
+      ],
+      "repeat": 8,
+      "options": {
+        "mode": ["Default", "Custom"]
+      },
+      "customizable": {
+        "warmup": true,
+        "work": true,
+        "recovery": true,
+        "repeat": true
+      }
+    },
+    {
+      "id": "core_interval_10",
+      "title": "Core Interval Training (10')",
+      "description": "Plank 30 detik → istirahat 30 detik → side plank kiri 30 detik → istirahat 30 detik → side plank kanan 30 detik → istirahat 30 detik, diulang 2 kali.",
+      "mode": "core",
+      "segments": [
+        {
+          "type": "work",
+          "label": "Plank",
+          "seconds": 30,
+          "cues": {
+            "tempo": "2-1-2-1",
+            "beep_start": true,
+            "beep_loop": true
+          }
+        },
+        {
+          "type": "recovery",
+          "label": "Istirahat",
+          "seconds": 30,
+          "cues": {
+            "beep_start": true
+          }
+        },
+        {
+          "type": "work",
+          "label": "Side Plank Kiri",
+          "seconds": 30,
+          "cues": {
+            "beep_start": true,
+            "beep_loop": true
+          }
+        },
+        {
+          "type": "recovery",
+          "label": "Istirahat",
+          "seconds": 30,
+          "cues": {
+            "beep_start": true
+          }
+        },
+        {
+          "type": "work",
+          "label": "Side Plank Kanan",
+          "seconds": 30,
+          "cues": {
+            "beep_start": true,
+            "beep_loop": true
+          }
+        },
+        {
+          "type": "recovery",
+          "label": "Istirahat",
+          "seconds": 30,
+          "cues": {
+            "beep_start": true
+          }
+        }
+      ],
+      "repeat": 2,
+      "options": {
+        "mode": ["Default", "Custom"]
+      },
+      "customizable": {
+        "work": true,
+        "recovery": true,
+        "repeat": true
+      }
+    },
+    {
+      "id": "breathing_box_8",
+      "title": "Breathing Intervals (Box 4-4-4-4)",
+      "description": "Sesi napas persegi 4-4-4-4 selama 8 menit.",
+      "mode": "breathing",
+      "segments": [
+        {
+          "type": "breath",
+          "label": "Box Breathing",
+          "seconds": 480,
+          "cues": {
+            "pattern": [4, 4, 4, 4],
+            "labels": ["Tarik Napas", "Tahan", "Hembuskan", "Tahan"],
+            "beep_start": true,
+            "beep_loop": true
+          }
+        }
+      ],
+      "repeat": 1,
+      "options": {
+        "mode": ["Default"]
+      }
+    }
+  ]
+}

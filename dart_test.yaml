@@ -1,0 +1,17 @@
+# Test configuration for intervals_training
+
+# Timeout for tests
+timeout: 30s
+
+# Test patterns
+patterns:
+  - "**/*_test.dart"
+
+# Exclude patterns
+exclude:
+  - "**/*.g.dart"
+  - "**/*.freezed.dart"
+
+# Test name pattern
+file_reporters:
+  json: build/test_results.json
