@@ -63,31 +63,37 @@ android {
                 storePassword = keystoreProperties['storePassword']
                 keyAlias = keystoreProperties['keyAlias']
                 keyPassword = keystoreProperties['keyPassword']
-            } else {
-                // FALLBACK: If release keys are missing, use debug keys so development isn't blocked
-                println "⚠️ key.properties not found! Falling back to debug signing configuration for release build."
-                storeFile = signingConfigs.debug.storeFile
-                storePassword = signingConfigs.debug.storePassword
-                keyAlias = signingConfigs.debug.keyAlias
-                keyPassword = signingConfigs.debug.keyPassword
             }
         }
     }
 
     buildTypes {
         debug {
-            // Standard config for fast hot-reloading and development loops
             signingConfig signingConfigs.debug
         }
-        
+
         release {
-            // Always points to release, which safely handles the logic above
-            signingConfig signingConfigs.release
-            
+            // Upload-key signing only. A missing key.properties fails release builds
+            // (see taskGraph check below) instead of silently signing with the debug
+            // key, which Play Console rejects.
+            if (keystorePropertiesFile.exists()) {
+                signingConfig signingConfigs.release
+            }
+
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+}
+
+gradle.taskGraph.whenReady { graph ->
+    def buildsRelease = graph.allTasks.any { it.project == project && it.name.toLowerCase().contains('release') }
+    if (buildsRelease && !keystorePropertiesFile.exists()) {
+        throw new org.gradle.api.GradleException(
+            "Release signing key missing: android/key.properties not found. " +
+            "Release builds must be signed with the upload key. " +
+            "Copy key.properties and the .keystore file into android/ (ask the project owner).")
     }
 }
 
