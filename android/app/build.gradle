@@ -22,9 +22,15 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
-    namespace "com.example.intervals_training"
-    compileSdk 34
+    namespace "com.bitenbyspider.intervals"
+    compileSdk 36
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -41,21 +47,46 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.intervals_training"
+        applicationId "com.bitenbyspider.intervals"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdkVersion 26
+        targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
-    buildTypes {
+    signingConfigs {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            if (keystorePropertiesFile.exists()) {
+                storeFile = rootProject.file(keystoreProperties['storeFile'])
+                storePassword = keystoreProperties['storePassword']
+                keyAlias = keystoreProperties['keyAlias']
+                keyPassword = keystoreProperties['keyPassword']
+            } else {
+                // FALLBACK: If release keys are missing, use debug keys so development isn't blocked
+                println "⚠️ key.properties not found! Falling back to debug signing configuration for release build."
+                storeFile = signingConfigs.debug.storeFile
+                storePassword = signingConfigs.debug.storePassword
+                keyAlias = signingConfigs.debug.keyAlias
+                keyPassword = signingConfigs.debug.keyPassword
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            // Standard config for fast hot-reloading and development loops
             signingConfig signingConfigs.debug
+        }
+        
+        release {
+            // Always points to release, which safely handles the logic above
+            signingConfig signingConfigs.release
+            
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }

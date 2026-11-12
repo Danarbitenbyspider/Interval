@@ -1,4 +1,4 @@
-package com.example.intervals_training
+package com.bitenbyspider.intervals
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine

@@ -1,4 +1,4 @@
-package com.example.intervals_training
+package com.bitenbyspider.intervals
 
 import android.media.AudioManager
 import android.media.ToneGenerator
